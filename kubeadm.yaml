@@ -1,0 +1,17 @@
+
+---
+- hosts: kubeadm       
+  become: true
+  become_method: sudo
+  remote_user: osixadm
+
+  tasks:
+
+  - name: kjør yaml for installasjon nrpe
+    include_tasks: install_nrpe.yaml
+
+  - name: kjør yaml for installasjon sudoers
+    include_tasks: install_sudoers.yaml
+
+
+

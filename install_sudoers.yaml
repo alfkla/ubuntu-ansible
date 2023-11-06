@@ -1,0 +1,7 @@
+
+
+  - name: Allow tings
+    community.general.sudoers:
+      name: nagios-sudo-allowance
+      user: nagios
+      commands: /usr/lib64/nagios/plugins/check_log3.pl, /usr/lib64/nagios/plugins/check_hwinfo.pl, /usr/lib64/nagios/plugins/db_size.sh, /usr/lib64/nagios/plugins/replication_info.sh, /usr/bin/check_postgres.pl, /usr/lib64/nagios/plugins/check_pgagent, /usr/lib64/nagios/plugins/check_barman, /usr/lib64/nagios/plugins/check_user_conn.bash, /usr/lib64/nagios/plugins/check_service, /usr/lib64/nagios/plugins/check_uptime, /usr/lib64/nagios/plugins/replication_delay.sh, /usr/lib/nagios/plugins/check_clientip_conn.bash, /usr/lib64/nagios/plugins/check_postgres.pl

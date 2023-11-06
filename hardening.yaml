@@ -1,0 +1,15 @@
+- hosts: nad
+  become: true
+
+  vars:
+    network_ipv6_enable: false
+    ssh_print_pam_motd: true
+    ssh_print_motd: true
+    ssh_print_last_log: true
+ 
+  collections:
+    - devsec.hardening
+
+  roles:
+    - ssh_hardening
+

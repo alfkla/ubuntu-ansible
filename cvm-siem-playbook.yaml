@@ -1,0 +1,18 @@
+
+---
+- hosts: cvm-siem
+  become: true
+  become_method: sudo
+  remote_user: alf
+
+  tasks:
+
+
+  - name: kjør yaml for installasjon sudoers
+    include_tasks: install_sudoers.yaml
+
+  - name: kjør yaml for installasjon nrpe
+    include_tasks: install_nrpe.yaml
+
+  - name: kjør yaml for installasjon av pakker
+    include_tasks: install_pakker.yaml

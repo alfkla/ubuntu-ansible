@@ -1,0 +1,18 @@
+
+---
+- hosts: dvh9
+  become: true
+  become_method: sudo
+  remote_user: alf
+
+  tasks:
+
+
+  - name: kjør yaml for installasjon sudoers
+    include_tasks: install_sudoers.yaml
+
+  - name: kjør yaml for installasjon nrpe
+    include_tasks: install_nrpe.yaml
+
+  - name: brukere og ssh-nøkler
+    include_tasks: install_osix_platform_users.yaml

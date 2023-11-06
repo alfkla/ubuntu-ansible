@@ -1,0 +1,6 @@
+
+apt-key del 4E40DDF6D76E284A4A6780E48C8C34C524098CB6
+wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor > /etc/apt/trusted.gpg.d/grafana.gpg
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/grafana.gpg] https://apt.grafana.com stable main" | tee /etc/apt/sources.list.d/grafana.list
+apt update
+

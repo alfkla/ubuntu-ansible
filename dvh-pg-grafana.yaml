@@ -1,0 +1,13 @@
+
+---
+- hosts: dvh-pg
+  become: true
+  become_method: sudo
+  remote_user: alf
+
+  tasks:
+
+
+  - name:  apt ting
+    include_tasks: install_grafana.yaml
+

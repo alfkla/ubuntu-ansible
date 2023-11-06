@@ -1,0 +1,66 @@
+
+---
+- hosts: cvm-siem
+  become: true
+  become_method: sudo
+  remote_user: alf
+
+  gather_facts: false
+  vars:
+# Define your username and password here that you want to create on target hosts.
+    iusername: ivar
+    iuserpass: MP3qfpIEzjL
+    gusername: geir
+    guserpass: AZU5lP0jQU2
+    kusername: kjartan
+    kuserpass: hwxit1hwuBN
+    super_group: sudo
+
+  tasks:
+    - name: Create User Ivar
+      ansible.builtin.user:
+        name: "{{ iusername }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ iuserpass | password_hash('sha512') }}"
+        update_password: on_create
+        groups: "{{ super_group }}"
+        append: yes
+
+    - name: Deploy SSH Public Key
+      ansible.posix.authorized_key:
+        user: "{{ iusername }}"
+        state: present
+        key: "{{ lookup('file', '/home/alf/ivar_id_rsa.pub') }}"
+
+    - name: Create User Geir
+      ansible.builtin.user:
+        name: "{{ gusername }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ guserpass | password_hash('sha512') }}"
+        update_password: on_create
+        groups: "{{ super_group }}"
+        append: yes
+
+    - name: Deploy SSH Public Key
+      ansible.posix.authorized_key:
+        user: "{{ gusername }}"
+        state: present
+        key: "{{ lookup('file', '/home/alf/geir_id_rsa.pub') }}"
+
+    - name: Create User Kjartan
+      ansible.builtin.user:
+        name: "{{ kusername }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ kuserpass | password_hash('sha512') }}"
+        update_password: on_create
+        groups: "{{ super_group }}"
+        append: yes
+
+    - name: Deploy SSH Public Key
+      ansible.posix.authorized_key:
+        user: "{{ kusername }}"
+        state: present
+        key: "{{ lookup('file', '/home/alf/kjartan_id_rsa.pub') }}"

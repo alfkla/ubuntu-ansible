@@ -1,0 +1,10 @@
+- hosts: nad
+  become: true
+
+  tasks:
+
+  - name: Installasjon av pakke snmpd
+    apt:
+      name: ['snmpd']
+      state: latest
+

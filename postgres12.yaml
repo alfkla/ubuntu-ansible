@@ -1,0 +1,20 @@
+
+---
+- hosts: dvh9
+  become: true
+  become_method: sudo
+  remote_user: alf
+  gather_facts: no
+
+  tasks:
+
+    - name: "Add postgres 12 repo"
+      ansible.builtin.apt_repository:
+        repo: deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main
+        state: present
+
+    - name: "Install PostgreSQL 12 packages"
+      apt:
+        name: ['postgresql-12','pgtop','check-pgactivity', 'pg-activity', 'pgagent', 'postgresql-12-postgis-3','postgresql-contrib']
+        state: latest
+

@@ -1,0 +1,40 @@
+
+  - name: Installasjon av pakke nagios-nrpe-server
+    apt:
+      name: ['nagios-nrpe-server']
+      state: latest
+
+  - name: Installasjon av pakke nagios-plugins
+    apt:
+      name: ['nagios-plugins']
+      state: latest
+
+  - name: Upgrade all packages to the latest version
+    apt:
+      name: "*"
+      state: latest
+
+  - name: "Kopierer nrpe.cfg nagios deamon konfigurasjon"
+    copy: src=files/nrpe.cfg dest=/etc/nagios/nrpe.cfg
+
+
+  - name: "Kopere nrpe skript filer"
+    copy: src={{ item }} dest=/usr/lib64/nagios/plugins/ owner=root group=root mode=0744
+    with_fileglob:
+      - files/check_hwinfo.pl
+      - files/check_log3.pl
+      - files/check_postgres.pl
+      - files/check_uptime
+      - files/db_size.sh
+      - files/utils.pm
+      - files/check_pgagent
+      - files/db_size.sh
+      - files/replication_delay.sh
+      - files/replication_info.sh
+      - files/check_service
+      - files/check_user_conn.bash
+      - files/check_service
+
+
+  - name: restart nagios-nrpe-server service
+    service: name=nagios-nrpe-server state=restarted

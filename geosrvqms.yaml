@@ -1,0 +1,32 @@
+
+---
+- hosts: geosrvqms
+  become: true
+  become_method: sudo
+  remote_user: alf
+
+# Define your username and password here that you want to create on target hosts.
+  vars:
+    rusername: rembjo
+    ruserpass: ZxFr322A2op
+    dusername: danand
+    duserpass: zmF97c0tT3G
+    ausername: alfkla
+    auserpass: tVm61aKJ3hw
+    super_group: sudo
+                             
+
+
+  tasks:
+
+#  - name: kjør yaml for installasjon sudoers
+#    include_tasks: install_sudoers.yaml
+
+#  - name: kjør yaml for installasjon nrpe
+#    include_tasks: install_nrpe.yaml
+
+#  - name: diverse pakker
+#    include_tasks: install_pakker.yaml
+
+  - name:  brukere og ssh-nøkler
+    include_tasks: install_brukere.yaml

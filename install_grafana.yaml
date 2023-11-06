@@ -1,0 +1,39 @@
+    - name: "Slett gammel apt key"
+      ansible.builtin.apt_key:
+        id: 4E40DDF6D76E284A4A6780E48C8C34C524098CB6
+        state: absent
+
+
+    - name: " Add an Apt signing key, uses whichever key is at the URL"
+      ansible.builtin.apt_key:
+        url: https://apt.grafana.com/gpg.key 
+        state: present
+
+    - name: Add grafana repository into sources list
+      ansible.builtin.apt_repository:
+        repo: deb-src https://apt.grafana.com stable main
+        state: present
+
+    - name: Install grafana packet
+      ansible.builtin.apt:
+        name: grafana
+        state: present
+
+## Tror vi må ta denne å få inn i ansible format!
+## echo "deb [signed-by=/usr/share/keyrings/grafana.gpg] https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
+
+#    - name: "somerepo | apt source"
+#      ansible.builtin.apt_repository:
+#        repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/grafana.gpg] https://apt.grafana.com stable main {{ ansible_distribution_release }} stable"
+#        state: present
+#
+
+#        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/myrepo.asc] https://download.example.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+#        repo: "deb [signed-by=/etc/apt/trusted.gpg.d/grafana.gpg] https://apt.grafana.com stable main" | tee /etc/apt/sources.list.d/grafana.list
+#
+#apt-key del 4E40DDF6D76E284A4A6780E48C8C34C524098CB6
+#wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor > /etc/apt/trusted.gpg.d/grafana.gpg
+#echo "deb [signed-by=/etc/apt/trusted.gpg.d/grafana.gpg] https://apt.grafana.com stable main" | tee /etc/apt/sources.list.d/grafana.list
+#apt update
+

@@ -1,0 +1,45 @@
+
+---
+- hosts: cvm-siem
+  become: true
+  become_method: sudo
+  remote_user: alf
+
+  tasks:
+      
+  - name: "Installasjon av diverse pakker"
+    apt: 
+      name: ['open-vm-tools']
+      state: latest
+
+
+
+  - name: Installasjon av pakke vim
+    apt:
+      name: ['vim']
+      state: latest
+
+  - name: Installasjon av pakke vim-common
+    apt:
+      name: ['vim-common']
+      state: latest
+
+  - name: Installasjon av pakke bash-completion
+    apt:
+      name: ['bash-completion']
+      state: latest
+
+
+  - name: Installasjon av pakke nrpe-ng
+    apt:
+      name: ['nrpe-ng']
+
+  - name: Installasjon av pakke nagios-nrpe-server
+    apt:
+      name: ['nagios-nrpe-server']
+      state: latest
+
+  - name: Installasjon av pakke nagios-plugins
+    apt:
+      name: ['nagios-plugins']
+      state: latest

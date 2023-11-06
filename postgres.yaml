@@ -1,0 +1,19 @@
+
+---
+- hosts: test-pg
+  become: true
+  become_method: sudo
+  remote_user: alf
+
+  tasks:
+    - name: "Update packages and upgrade"
+      apt:
+        update_cache: true
+        upgrade: dist
+        force_apt_get: true
+
+    - name: "Install PostgreSQL packages"
+      apt:
+        name: ['postgresql','pgtop','check-pgactivity', 'pg-activity', 'pgagent', 'postgis','postgresql-contrib']
+        state: latest
+

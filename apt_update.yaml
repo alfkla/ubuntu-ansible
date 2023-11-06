@@ -1,0 +1,14 @@
+
+  tasks:
+
+    - name: "Task nummer to"
+      apt:
+        update_cache: yes
+        upgrade: 'yes'
+
+
+#    - name: "Update packages and upgrade"
+      #apt:
+      #  update_cache: true
+      #  upgrade: dist
+      #  force_apt_get: true

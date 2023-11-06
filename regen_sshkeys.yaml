@@ -1,0 +1,22 @@
+---
+- hosts: aigpu
+  become: true
+  gather_facts: false
+
+  tasks:
+ 
+    - name: Generate /etc/ssh/ RSA host key
+      command : echo -e 'y\n'|ssh-keygen -q -t rsa -f /etc/ssh/ssh_host_rsa_key -C "" -N ""
+      register: output
+    - debug: var=output.stdout_lines
+
+    - name: Generate /etc/ssh/ DSA host key
+      command : echo -e 'y\n'|ssh-keygen -q -t dsa -f /etc/ssh/ssh_host_dsa_key -C "" -N ""
+      register: output
+    - debug: var=output.stdout_lines
+
+    - name: Generate /etc/ssh/ ECDSA host key
+      command : echo -e 'y\n'|ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -C "" -N ""
+      register: output
+    - debug: var=output.stdout_lines
+
